@@ -17,3 +17,17 @@ response = requests.get(
     "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByPin", params=parameters)
 slot_information = processapidatato_json(response.json())
 
+print(slot_information)
+
+htmlout = jason2html.converter(slot_information)
+
+print(htmlout)
+
+file1 = open("slot_info.html", "w")
+
+file1.write(htmlout)
+
+
+
+    
+
