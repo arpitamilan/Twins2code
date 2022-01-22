@@ -30,6 +30,14 @@ table {
   width: 100%;
 }
 
+<Please give in pincode>
+Pincode:
+<br> <br>
+
+Date:
+<input>
+<br> <br>
+
 td, th {
   border: 1px solid #ddd;
   padding: 8px;
