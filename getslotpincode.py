@@ -1,25 +1,27 @@
-#To get covid vaccination slots by pincode and date
+#To get covid vaccination slots by using pincode and date 
+
 import requests
 import json
 from json2html import *
 
+#Function 1 - To process data received from api to json format
 def processapidatato_json(data):
     text = json.dumps(data, sort_keys=True, indent=4)
-    #print(text)
     return text
- 
+
+#Paramters to be passed to the API [pincode + date]
 parameters = {
-    "pincode": 411033,
+    "pincode": 560048,
     "date": "22-01-2022"
 }
-#Find slots for pin-code
+
+#Get information from API to get vaccination slots based on pincode and date
 response = requests.get(
     "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByPin", params=parameters)
-
 slot_information = processapidatato_json(response.json())
-
 jsontohtml = json2html.convert(slot_information)
 
+#HTML Format - Head + Body
 htmlstart = """
 <html><head><title>>Covd-19 Vaccination Slots Tracker</title><style>
 table {
@@ -48,21 +50,18 @@ th {
 <h1> COVID-19 VACCINATION SLOTS FINDER </h1>
 """
 
+#HTML Format - End
 htmlend = """
 </body></html>
 """
 
+# Combine html code and json formatted data received from API
 contenttowrite = htmlstart + jsontohtml + htmlend
 
-writetofile = open("slot_info.html", "w")
+#Write the complete content to file
+writetofile = open("covid19_vaccine_available_slots.html", "w")
 writetofile.write(contenttowrite)
 writetofile.close()
 writetofile.close()
 
 print ("SUCCESS: Data retrieved from API and written to HTML file successfully!")
-
-
-
-
-    
-
